@@ -22,12 +22,14 @@ namespace LD44
             UpdateEnergyAlienLabel(0);
             UpdateSacrificeCostLabel(0);
             UpdateDrugsLabel(0);
+            UpdateDaysToNextChamacosLabel(0);
 
             GameManager.Instance.OnCurrentChamacosModified += UpdateCurrentChamacosLabel;
             GameManager.Instance.OnReadyChamacosModified += UpdateReadyChamacosLabel;
             GameManager.Instance.OnRestingChamacosModified += UpdateRestingChamacosLabel;
             GameManager.Instance.OnWorkingChamacosModified += UpdateWorkingChamacosLabel;
             GameManager.Instance.OnDrugsModified += UpdateDrugsLabel;
+            GameManager.Instance.OnChamacoDaysModified += UpdateDaysToNextChamacosLabel;
 
             TimeManager.Instance.OnFactoryTicked += UpdateTicksLabel;
 
@@ -103,6 +105,11 @@ namespace LD44
             drugsLabel.text = quantity.ToString();
         }
 
+        public void UpdateDaysToNextChamacosLabel(int quantity)
+        {
+            daysToNextChamacosLabel.text = quantity.ToString();
+        }
+
         [SerializeField] TextMeshProUGUI currentChamacosLabel;
         [SerializeField] TextMeshProUGUI restingChamacosLabel;
         [SerializeField] TextMeshProUGUI workingChamacosLabel;
@@ -116,6 +123,7 @@ namespace LD44
         [SerializeField] TextMeshProUGUI energyAlienLabel;
         [SerializeField] TextMeshProUGUI sacrificeCostLabel;
         [SerializeField] TextMeshProUGUI drugsLabel;
+        [SerializeField] TextMeshProUGUI daysToNextChamacosLabel;
 
         [SerializeField] Button goToWorkButton;
         [SerializeField] Button scrificeButton;

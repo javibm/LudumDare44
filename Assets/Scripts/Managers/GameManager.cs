@@ -35,6 +35,12 @@ namespace LD44
         [SerializeField]
         private int drugsPerSacrifice;
 
+        [SerializeField]
+        private int daysToBringNewChamacos;
+
+        [SerializeField]
+        private int numberOfNewChamacos;
+
         [Header("UI")]
         [SerializeField]
         private GameplayUIManager gameplayUIManager;
@@ -47,6 +53,8 @@ namespace LD44
                 return days;
             }
         }
+
+        private int chamacosDay;
 
         private int ticks;
 
@@ -73,6 +81,7 @@ namespace LD44
         public Action<int> OnRestingChamacosModified;
         public Action<int> OnReadyChamacosModified;
         public Action<int> OnDrugsModified;
+        public Action<int> OnChamacoDaysModified;
 
         public void Awake()
         {
@@ -88,6 +97,7 @@ namespace LD44
             NewChamacos(initialChamacos);
             SetRestingChamacos(0);
             SetWorkingChamacos(0);
+            SetNewChamacoDay();
 
             // Arranca el TimeManager
             TimeManager.Instance.Init(timePerDay);
@@ -183,6 +193,12 @@ namespace LD44
             CheckChumacosGameOver();
         }
 
+
+        private void SetNewChamacoDay()
+        {
+            SetChamacoDays(days + daysToBringNewChamacos);
+        }
+
         private void SetDrugs(int value)
         {
             drugs = value;
@@ -192,9 +208,24 @@ namespace LD44
             }
         }
 
+        private void SetChamacoDays(int value)
+        {
+            chamacosDay = value;
+            UpdateChamacoDays();
+        }
+
+        private void UpdateChamacoDays()
+        {
+            if (OnChamacoDaysModified != null)
+            {
+                OnChamacoDaysModified(chamacosDay - days);
+            }
+        }
+
         private void SetDays(int value)
         {
             days = value;
+            UpdateChamacoDays();
             gameplayUIManager.UpdateDaysLabel(value);
         }
 
@@ -245,6 +276,12 @@ namespace LD44
         private void OnDayEnded()
         {
             SetDays(++days);
+
+            if (days == chamacosDay)
+            {
+                NewChamacos(numberOfNewChamacos);
+                SetNewChamacoDay();
+            }
 
             if (FactoryManager.Instance.CurrentEnergy < AlienManager.Instance.CurrentEnergyNeeded)
             {

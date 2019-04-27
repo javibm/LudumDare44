@@ -64,32 +64,34 @@ namespace LD44
             }
         }
 
-        private void CheckIfDayEnded()
-        {
-            if (currentTick > timePerDay)
-            {
-                currentTick = 0;
-                if (OnDayEnded != null)
-                {
-                    Debug.Log("Day Ended");
-                    OnDayEnded();
-                }
-            }
-        }
-
         private void CheckIfWorldTicked()
         {
             if (currentTickTime > worldTickedTime)
             {
                 currentTickTime = 0.0f;
-                currentTick++;
-                if (OnFactoryTicked != null)
+                if (currentTick + 1 > timePerDay)
                 {
-                    Debug.Log("World Ticked: " + currentTick);
-                    OnFactoryTicked();
+                    currentTick = 0;
+                    if (OnFactoryTicked != null)
+                    {
+                        Debug.Log("World Ticked: " + currentTick);
+                        OnFactoryTicked();
+                    }
+                    if (OnDayEnded != null)
+                    {
+                        Debug.Log("Day Ended");
+                        OnDayEnded();
+                    }
                 }
-
-                CheckIfDayEnded();
+                else
+                {
+                    currentTick++;
+                    if (OnFactoryTicked != null)
+                    {
+                        Debug.Log("World Ticked: " + currentTick);
+                        OnFactoryTicked();
+                    }
+                }
             }
         }
 
