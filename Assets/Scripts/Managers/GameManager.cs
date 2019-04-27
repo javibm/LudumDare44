@@ -190,7 +190,7 @@ namespace LD44
 
         }
 
-        private void NewChamaco()
+        public void NewChamaco()
         {
             SetReadyChamacos(++readyChamacos);
             SetCurrentChamacos(++currentChamacos);
