@@ -16,7 +16,6 @@ namespace LD44
         void OnTriggerEnter(Collider other)
         {
             colliders.Add(other);
-            Debug.Log("Entro");
             anim.Play("doorOpen");
         }
 
@@ -34,7 +33,6 @@ namespace LD44
 
         void OnTriggerExit(Collider other)
         {
-            Debug.Log("SALGO");
             if (!someoneInside)
             {
                 anim.Play("doorClose");
