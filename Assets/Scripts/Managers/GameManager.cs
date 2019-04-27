@@ -11,16 +11,18 @@ namespace LD44
         private int initialChamacos;
 
         [SerializeField]
-        private float timePerDay;
+        private int timePerDay;
 
         [SerializeField]
         private float chamacoEnergyPerSecond;
 
         [SerializeField]
-        private float chamacoSecondsGeneratingEnergy;
+        private int chamacoSecondsGeneratingEnergy;
 
         [SerializeField]
         private int chamacosKilledPerFail;
+
+        private int days;
 
         private int currentChamacos;
         public int CurrentChamacos
@@ -60,8 +62,15 @@ namespace LD44
 
         public Action OnGameOver;
 
+        public void Awake()
+        {
+            InitGame();
+        }
         public void InitGame()
         {
+            // Reset
+            days = 0;
+
             // Los chamacos empiezan directamente en ready
             currentChamacos = readyChamacos = initialChamacos;
             restingChamacos = workingChamacos = 0;
@@ -71,8 +80,14 @@ namespace LD44
 
             // Arranca el TimeManager
             TimeManager.Instance.Init(timePerDay);
-
+            TimeManager.Instance.OnDayEnded += OnDayEnded;
             // Notificar a marcos que instancia los chamacos en Ready
+
+        }
+
+        private void OnDestroy()
+        {
+            TimeManager.Instance.OnDayEnded -= OnDayEnded;
         }
 
         private void SendChamacoToRest()
@@ -82,6 +97,7 @@ namespace LD44
             restingChamacos++;
 
             // Notificar a Marcos para que los mueva
+
         }
 
         private void SendChamacoToWork()
@@ -91,6 +107,9 @@ namespace LD44
             workingChamacos++;
 
             // Notificar a Marcos para que los mueva
+
+            // Timer para que dejen de trabajar
+            TimeManager.Instance.SetTimer(chamacoSecondsGeneratingEnergy, SendChamacoToRest);
         }
 
         private void SendChamacoToReady()
@@ -100,6 +119,7 @@ namespace LD44
             readyChamacos++;
 
             // Notificar a Marcos para que los mueva
+
         }
 
         private void NewChamacos(int quantity)
@@ -107,12 +127,15 @@ namespace LD44
             readyChamacos += quantity;
             currentChamacos += quantity;
             // Notificar a Marcos para que los spawnee
+
         }
 
         private void KillChamacos(int quantity)
         {
             readyChamacos -= quantity;
             currentChamacos -= quantity;
+            // Notificar a Marcos para que los despawnee
+
             CheckChumacosGameOver();
         }
 
@@ -126,6 +149,8 @@ namespace LD44
 
         private void OnDayEnded()
         {
+            days++;
+
             if (FactoryManager.Instance.CurrentEnergy < AlienManager.Instance.CurrentEnergyNeeded)
             {
                 KillChamacos(chamacosKilledPerFail);
