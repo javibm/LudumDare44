@@ -38,6 +38,7 @@ namespace LD44
                 });
                 transform.position = endPos;
                 Idle();
+                GameManager.Instance.NewChamaco();
             }
         }
 
@@ -51,6 +52,7 @@ namespace LD44
                 if (fromRest)
                 {
                     yield return GoToPositionCoroutine(ChamacoManager.Instance.RestHall.position, hallRadius);
+                    GameManager.Instance.SendChamacoToReady();
                 }
                 while (true)
                 {
@@ -69,6 +71,7 @@ namespace LD44
                 yield return GoToPositionCoroutine(ChamacoManager.Instance.WorkHall.position, hallRadius);
                 yield return GoToPositionCoroutine(ChamacoManager.Instance.WorkPlace.position);
                 ChamacoManager.Instance.OnChamacoWorking(this);
+                GameManager.Instance.SendChamacoToWork();
             }
         }
 
@@ -82,6 +85,7 @@ namespace LD44
                 yield return GoToPositionCoroutine(ChamacoManager.Instance.RestHall.position, hallRadius);
                 yield return GoToPositionCoroutine(ChamacoManager.Instance.RestPlace.position);
                 ChamacoManager.Instance.OnChamacoResting(this);
+                GameManager.Instance.SendChamacoToRest();
             }
         }
 
