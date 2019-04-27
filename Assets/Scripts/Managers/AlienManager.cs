@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace LD44
 {
@@ -12,6 +13,17 @@ namespace LD44
             get
             {
                 return currentEnergyNeeded;
+            }
+        }
+
+        public Action<int> OnEnergyRequest;
+
+        public void GetNextRequest()
+        {
+            currentEnergyNeeded = UnityEngine.Random.Range(1, 3);
+            if (OnEnergyRequest != null)
+            {
+                OnEnergyRequest(currentEnergyNeeded);
             }
         }
     }

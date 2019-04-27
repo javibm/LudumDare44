@@ -17,11 +17,11 @@ namespace LD44
             }
         }
 
-        private float currentEnergyChunk;
+        private float currentEnergyChunk = 0.0f;
 
         private float chamacoEnergyPerSecond;
 
-        public Action OnChunkEnergyProduced;
+        public Action<int> OnChunkEnergyProduced;
 
         public Action<float> OnUpdatedEnergyProduction;
 
@@ -29,7 +29,7 @@ namespace LD44
         {
             chamacoEnergyPerSecond = _chamacoEnergyPerSecond;
             currentEnergy = 0;
-            currentEnergyChunk = 0;
+            currentEnergyChunk = 0.0f;
 
             TimeManager.Instance.OnFactoryTicked += Tick;
         }
@@ -37,13 +37,13 @@ namespace LD44
         private void Tick()
         {
             currentEnergyChunk += GameManager.Instance.WorkingChamacos * chamacoEnergyPerSecond;
-            if (currentEnergyChunk > 1.0f)
+            if (currentEnergyChunk >= 1.0f)
             {
                 currentEnergyChunk = 0.0f;
                 currentEnergy++;
                 if (OnChunkEnergyProduced != null)
                 {
-                    OnChunkEnergyProduced();
+                    OnChunkEnergyProduced(currentEnergy);
                 }
             }
 
@@ -56,6 +56,7 @@ namespace LD44
         public void ResetEnergy()
         {
             currentEnergy = 0;
+            OnChunkEnergyProduced(0);
         }
     }
 }
