@@ -124,23 +124,28 @@ namespace LD44
 
         private void MoveChamacoToRest()
         {
+            SetWorkingChamacos(--workingChamacos);
             ChamacoManager.Instance.MakeWorkingChamacoGoToRest();
         }
 
         public void MoveChamacoToWork()
         {
-            ChamacoManager.Instance.MakeIdleChamacoGoToWork();
+            if (readyChamacos > 0)
+            {
+                SetReadyChamacos(--readyChamacos);
+                ChamacoManager.Instance.MakeIdleChamacoGoToWork();
+            }
         }
 
         private void MoveChamacoToReady()
         {
+            SetRestingChamacos(--restingChamacos);
             ChamacoManager.Instance.MakeRestingChamacoGoToIdle();
         }
 
         public void SendChamacoToRest()
         {
             // Solo se pueden mover chamacos a rest desde work
-            SetWorkingChamacos(--workingChamacos);
             SetRestingChamacos(++restingChamacos);
 
             // Timer para que dejen de descansar
@@ -153,7 +158,6 @@ namespace LD44
             {
                 // Solo se pueden mover desde ready
                 SetWorkingChamacos(++workingChamacos);
-                SetReadyChamacos(--readyChamacos);
 
                 // Timer para que dejen de trabajar
                 TimeManager.Instance.SetTimer(chamacoSecondsWorking, MoveChamacoToRest);
@@ -165,7 +169,6 @@ namespace LD44
             if (restingChamacos > 0)
             {
                 // Se pueden llamar a ready poque ha pasado el tiempo de rest o porque has gastado comida
-                SetRestingChamacos(--restingChamacos);
                 SetReadyChamacos(++readyChamacos);
             }
         }
