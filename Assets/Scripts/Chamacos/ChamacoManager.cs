@@ -40,6 +40,29 @@ namespace LD44
             chamaco.transform.position = spawnPos;
         }
 
+        public IEnumerator DespawnChamacos(int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                ChamacoManager.Instance.DespawnChamaco();
+                yield return new WaitForSeconds(0.3f);
+            }
+        }
+
+        public void DespawnChamaco()
+        {
+            // Por ahora hacemos despawn a los ready
+            if (idleChamacos.Count > 0)
+            {
+                int random = Random.Range(0, idleChamacos.Count);
+                Destroy(idleChamacos[random].gameObject);
+                idleChamacos.RemoveAt(random);
+
+                GameManager.Instance.KillChamaco();
+            }
+
+        }
+
         public void MakeIdleChamacoGoToWork()
         {
             if (idleChamacos.Count > 0)

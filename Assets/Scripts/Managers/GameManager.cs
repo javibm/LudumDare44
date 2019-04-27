@@ -204,8 +204,13 @@ namespace LD44
 
         private void KillChamacos(int quantity)
         {
-            SetReadyChamacos(readyChamacos - quantity);
-            SetCurrentChamacos(currentChamacos - quantity);
+            StartCoroutine(ChamacoManager.Instance.DespawnChamacos(quantity));
+        }
+
+        public void KillChamaco()
+        {
+            SetReadyChamacos(--readyChamacos);
+            SetCurrentChamacos(--currentChamacos);
 
             CheckChumacosGameOver();
         }
