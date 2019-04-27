@@ -169,11 +169,8 @@ namespace LD44
 
         public void SendChamacoToReady()
         {
-            if (restingChamacos > 0)
-            {
-                // Se pueden llamar a ready poque ha pasado el tiempo de rest o porque has gastado comida
-                SetReadyChamacos(++readyChamacos);
-            }
+            // Se pueden llamar a ready poque ha pasado el tiempo de rest o porque has gastado comida
+            SetReadyChamacos(++readyChamacos);
         }
 
         public void SacrificeChamacos()
