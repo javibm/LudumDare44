@@ -121,7 +121,7 @@ namespace LD44
             }
         }
 
-        private void SendChamacoToRest()
+        public void SendChamacoToRest()
         {
             // Solo se pueden mover chamacos a rest desde work
             SetWorkingChamacos(--workingChamacos);
@@ -148,7 +148,7 @@ namespace LD44
             }
         }
 
-        private void SendChamacoToReady()
+        public void SendChamacoToReady()
         {
             if (restingChamacos > 0)
             {
