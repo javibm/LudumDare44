@@ -30,6 +30,9 @@ namespace LD44
         private int alienEnergyRequest;
 
         [SerializeField]
+        private int incrementAlienEnergyRequest;
+
+        [SerializeField]
         private int sacrificeCost;
 
         [SerializeField]
@@ -105,7 +108,7 @@ namespace LD44
 
             // FactoryManager
             FactoryManager.Instance.Init(chamacoEnergyPerSecond);
-            AlienManager.Instance.Init(alienEnergyRequest, sacrificeCost);
+            AlienManager.Instance.Init(alienEnergyRequest, incrementAlienEnergyRequest, sacrificeCost);
             // Notificar a marcos que instancia los chamacos en Ready
 
         }
@@ -292,6 +295,8 @@ namespace LD44
                 int energyForShip = FactoryManager.Instance.CurrentEnergy - AlienManager.Instance.CurrentEnergyNeeded;
                 ShipManager.Instance.AddEnergy(energyForShip);
             }
+
+            AlienManager.Instance.GetNextRequest();
 
             FactoryManager.Instance.ResetEnergy();
         }
