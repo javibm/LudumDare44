@@ -401,6 +401,7 @@ MonoBehaviour:
   energyAlienLabel: {fileID: 383990304}
   sacrificeCostLabel: {fileID: 731377829}
   drugsLabel: {fileID: 777024788}
+  daysToNextChamacosLabel: {fileID: 822678933}
   goToWorkButton: {fileID: 799944065}
   scrificeButton: {fileID: 1424628699}
   useDrugsButton: {fileID: 1238190617}
@@ -1028,8 +1029,8 @@ MonoBehaviour:
   alienEnergyRequest: 60
   sacrificeCost: 3
   drugsPerSacrifice: 4
-  daysToBringNewChamacos: 0
-  numberOfNewChamacos: 0
+  daysToBringNewChamacos: 2
+  numberOfNewChamacos: 5
   gameplayUIManager: {fileID: 81307810}
 --- !u!4 &559847747
 Transform:
