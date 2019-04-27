@@ -124,8 +124,11 @@ namespace LD44
 
         private void MoveChamacoToRest()
         {
-            SetWorkingChamacos(--workingChamacos);
-            ChamacoManager.Instance.MakeWorkingChamacoGoToRest();
+            if (workingChamacos > 0)
+            {
+                SetWorkingChamacos(--workingChamacos);
+                ChamacoManager.Instance.MakeWorkingChamacoGoToRest();
+            }
         }
 
         public void MoveChamacoToWork()
@@ -139,8 +142,11 @@ namespace LD44
 
         private void MoveChamacoToReady()
         {
-            SetRestingChamacos(--restingChamacos);
-            ChamacoManager.Instance.MakeRestingChamacoGoToIdle();
+            if (restingChamacos > 0)
+            {
+                SetRestingChamacos(--restingChamacos);
+                ChamacoManager.Instance.MakeRestingChamacoGoToIdle();
+            }
         }
 
         public void SendChamacoToRest()
@@ -286,7 +292,10 @@ namespace LD44
         {
             if (readyChamacos <= 0)
             {
-                OnGameOver();
+                if (OnGameOver != null)
+                {
+                    OnGameOver();
+                }
             }
         }
 
