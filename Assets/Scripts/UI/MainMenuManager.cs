@@ -16,6 +16,8 @@ namespace LD44
       creditsButton.onClick.AddListener(GoToCredtis);
       backToMainMenuButton.onClick.AddListener(GoToMainMenu);
       exitButton.onClick.AddListener(Exit);
+
+      AudioLibrary.Instance.MainMenuMusic.Play(true);
     }
 
     private void Update()
@@ -42,7 +44,7 @@ namespace LD44
       mainMenuParentGroup.interactable = false;
       creditsParentGroup.alpha = 0;
       creditsParentGroup.interactable = false;
-      SceneManager.LoadSceneAsync(1);
+      ScenesFlowManager.GoToGameplay();
     }
 
     private void GoToMainMenu()
