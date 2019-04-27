@@ -47,17 +47,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4529e089e1ef3574e911dcd6152fdff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialChamacos: 2
+  initialChamacos: 4
   timePerDay: 60
-  chamacoEnergyPerSecond: 0.05
-  chamacoSecondsWorking: 15
-  chamacosKilledPerFail: 2
-  chamacoSecondsResting: 30
-  alienEnergyRequest: 1
-  incrementAlienEnergyRequest: 0
+  ticksPerSecond: 60
+  chamacoEnergyPerSecond: 0.025
+  chamacoSecondsWorking: 20
+  chamacosKilledPerFail: 4
+  chamacoSecondsResting: 15
+  alienEnergyRequest: 2
+  incrementAlienEnergyRequest: 1
   sacrificeCost: 3
-  drugsPerSacrifice: 4
-  daysToBringNewChamacos: 2
+  drugsPerSacrifice: 2
+  daysToBringNewChamacos: 3
   numberOfNewChamacos: 5
   gameplayUIManager: {fileID: 0}
 --- !u!114 &1976324496978144926
