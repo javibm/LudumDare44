@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: bfd0042abe99dae4fba39a95d2c3b22e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - ChamacoPrefab: {fileID: 247719181639042050, guid: c309157b20f692c40abb9e1cb7596b35,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
