@@ -16,11 +16,17 @@ namespace LD44
             }
         }
 
-        public Action<int> OnEnergyRequest;
+        private int baseAlienEnergyRequest;
 
+        public Action<int> OnEnergyRequest;
+        public void Init(int _alienEnergyRequest)
+        {
+            baseAlienEnergyRequest = _alienEnergyRequest;
+            GetNextRequest();
+        }
         public void GetNextRequest()
         {
-            currentEnergyNeeded = UnityEngine.Random.Range(1, 3);
+            currentEnergyNeeded = baseAlienEnergyRequest;
             if (OnEnergyRequest != null)
             {
                 OnEnergyRequest(currentEnergyNeeded);

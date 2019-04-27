@@ -7,6 +7,7 @@ namespace LD44
 {
     public class GameManager : Singleton<GameManager>
     {
+        [Header("Game Config")]
         [SerializeField]
         private int initialChamacos;
 
@@ -24,6 +25,9 @@ namespace LD44
 
         [SerializeField]
         private int chamacoSecondsResting;
+
+        [SerializeField]
+        private int alienEnergyRequest;
 
         [Header("UI")]
         [SerializeField]
@@ -87,7 +91,7 @@ namespace LD44
 
             // FactoryManager
             FactoryManager.Instance.Init(chamacoEnergyPerSecond);
-            AlienManager.Instance.GetNextRequest();
+            AlienManager.Instance.Init(alienEnergyRequest);
             // Notificar a marcos que instancia los chamacos en Ready
 
         }
