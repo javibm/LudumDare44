@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace LD44
 {
@@ -15,9 +16,15 @@ namespace LD44
             }
         }
 
+        public Action<int> OnEnergyAdded;
+
         public void AddEnergy(int quantity)
         {
             currentEnergy += quantity;
+            if (OnEnergyAdded != null)
+            {
+                OnEnergyAdded(quantity);
+            }
         }
 
     }

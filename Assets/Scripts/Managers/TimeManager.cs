@@ -12,7 +12,14 @@ namespace LD44
         public Action OnDayEnded;
         public Action OnFactoryTicked;
 
-        private float currentTime;
+        private int currentTick;
+        public int CurrentTick
+        {
+            get
+            {
+                return currentTick;
+            }
+        }
         private float currentTickTime;
 
         private bool initialized = false;
@@ -27,18 +34,18 @@ namespace LD44
 
             initialized = true;
             timePerDay = _timePerDay;
-            currentTime = 0.0f;
+            currentTick = 0;
+            currentTickTime = 0.0f;
         }
 
         public void SetTimer(int time, Action OnTimeEnded)
         {
-            int timeToAction = time + (int)currentTime;
+            int timeToAction = time + currentTick;
 
             if (timeToAction > timePerDay)
             {
                 timeToAction -= timePerDay;
             }
-
             if (!timers.ContainsKey(timeToAction))
             {
                 timers[timeToAction] = new List<Action>();
@@ -50,20 +57,18 @@ namespace LD44
         {
             if (initialized)
             {
-                CheckIfDayEnded();
                 CheckIfWorldTicked();
                 CheckTimers();
 
-                currentTime += Time.deltaTime;
                 currentTickTime += Time.deltaTime;
             }
         }
 
         private void CheckIfDayEnded()
         {
-            if (currentTime > timePerDay)
+            if (currentTick > timePerDay)
             {
-                currentTime = 0.0f;
+                currentTick = 0;
                 if (OnDayEnded != null)
                 {
                     Debug.Log("Day Ended");
@@ -77,25 +82,29 @@ namespace LD44
             if (currentTickTime > worldTickedTime)
             {
                 currentTickTime = 0.0f;
+                currentTick++;
                 if (OnFactoryTicked != null)
                 {
-                    Debug.Log("World Ticked");
+                    Debug.Log("World Ticked: " + currentTick);
                     OnFactoryTicked();
                 }
+
+                CheckIfDayEnded();
             }
         }
 
         private void CheckTimers()
         {
-            if (timers.ContainsKey((int)currentTime))
+            if (timers.ContainsKey(currentTick))
             {
-                foreach (Action action in timers[(int)currentTime])
+                foreach (Action action in timers[currentTick].ToArray())
                 {
                     if (action != null)
                     {
                         action();
                     }
                 }
+                timers.Remove(currentTick);
             }
         }
     }
