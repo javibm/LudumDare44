@@ -44,12 +44,7 @@ namespace LD44
       mainMenuParentGroup.interactable = false;
       creditsParentGroup.alpha = 0;
       creditsParentGroup.interactable = false;
-      SceneManager.LoadSceneAsync(1).completed += OnGameplayLoaded;
-    }
-
-    private void OnGameplayLoaded(AsyncOperation asyncOperation)
-    {
-      AudioLibrary.Instance.MainMenuMusic.Stop();
+      ScenesFlowManager.GoToGameplay();
     }
 
     private void GoToMainMenu()

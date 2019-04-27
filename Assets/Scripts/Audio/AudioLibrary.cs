@@ -6,6 +6,7 @@ namespace LD44
   public class AudioLibrary : ScriptableObject
   {
     public AudioClip MainMenuMusic;
+    public AudioClip GameplayMusic;
 
     public static AudioLibrary Instance
     {
