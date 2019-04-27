@@ -141,7 +141,7 @@ namespace LD44
             SetRestingChamacos(++restingChamacos);
 
             // Timer para que dejen de descansar
-            TimeManager.Instance.SetTimer(chamacoSecondsResting, MoveChamacoToRest);
+            TimeManager.Instance.SetTimer(chamacoSecondsResting, MoveChamacoToReady);
         }
 
         public void SendChamacoToWork()
