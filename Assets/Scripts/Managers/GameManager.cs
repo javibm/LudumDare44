@@ -121,16 +121,29 @@ namespace LD44
             }
         }
 
+        private void MoveChamacoToRest()
+        {
+            ChamacoManager.Instance.MakeWorkingChamacoGoToRest();
+        }
+
+        public void MoveChamacoToWork()
+        {
+            ChamacoManager.Instance.MakeIdleChamacoGoToWork();
+        }
+
+        private void MoveChamacoToReady()
+        {
+            ChamacoManager.Instance.MakeRestingChamacoGoToIdle();
+        }
+
         public void SendChamacoToRest()
         {
             // Solo se pueden mover chamacos a rest desde work
             SetWorkingChamacos(--workingChamacos);
             SetRestingChamacos(++restingChamacos);
 
-            // Notificar a Marcos para que los mueva
-
             // Timer para que dejen de descansar
-            TimeManager.Instance.SetTimer(chamacoSecondsResting, SendChamacoToReady);
+            TimeManager.Instance.SetTimer(chamacoSecondsResting, MoveChamacoToRest);
         }
 
         public void SendChamacoToWork()
@@ -141,10 +154,8 @@ namespace LD44
                 SetWorkingChamacos(++workingChamacos);
                 SetReadyChamacos(--readyChamacos);
 
-                // Notificar a Marcos para que los mueva
-
                 // Timer para que dejen de trabajar
-                TimeManager.Instance.SetTimer(chamacoSecondsWorking, SendChamacoToRest);
+                TimeManager.Instance.SetTimer(chamacoSecondsWorking, MoveChamacoToRest);
             }
         }
 
@@ -155,8 +166,6 @@ namespace LD44
                 // Se pueden llamar a ready poque ha pasado el tiempo de rest o porque has gastado comida
                 SetRestingChamacos(--restingChamacos);
                 SetReadyChamacos(++readyChamacos);
-
-                // Notificar a Marcos para que los mueva
             }
         }
 
@@ -173,8 +182,7 @@ namespace LD44
         {
             if (drugs > 0 && restingChamacos > 0)
             {
-                SetReadyChamacos(++readyChamacos);
-                SetRestingChamacos(--restingChamacos);
+                ChamacoManager.Instance.MakeRestingChamacoGoToIdle();
                 SetDrugs(--drugs);
             }
         }
@@ -183,7 +191,6 @@ namespace LD44
         {
             SetReadyChamacos(readyChamacos + quantity);
             SetCurrentChamacos(currentChamacos + quantity);
-            // Notificar a Marcos para que los spawnee
 
         }
 

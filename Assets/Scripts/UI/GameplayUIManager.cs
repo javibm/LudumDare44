@@ -40,7 +40,7 @@ namespace LD44
             AlienManager.Instance.OnEnergyRequest += UpdateEnergyAlienLabel;
             AlienManager.Instance.OnUpdateSacrificeCost += UpdateSacrificeCostLabel;
 
-            goToWorkButton.onClick.AddListener(GameManager.Instance.SendChamacoToWork);
+            goToWorkButton.onClick.AddListener(GameManager.Instance.MoveChamacoToWork);
             scrificeButton.onClick.AddListener(GameManager.Instance.SacrificeChamacos);
             useDrugsButton.onClick.AddListener(GameManager.Instance.UseDrugs);
         }
