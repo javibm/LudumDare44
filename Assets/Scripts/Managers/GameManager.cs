@@ -114,14 +114,17 @@ namespace LD44
 
         public void SendChamacoToWork()
         {
-            // Solo se pueden mover desde ready
-            SetWorkingChamacos(++workingChamacos);
-            SetReadyChamacos(--readyChamacos);
+            if (readyChamacos > 0)
+            {
+                // Solo se pueden mover desde ready
+                SetWorkingChamacos(++workingChamacos);
+                SetReadyChamacos(--readyChamacos);
 
-            // Notificar a Marcos para que los mueva
+                // Notificar a Marcos para que los mueva
 
-            // Timer para que dejen de trabajar
-            TimeManager.Instance.SetTimer(chamacoSecondsWorking, SendChamacoToRest);
+                // Timer para que dejen de trabajar
+                TimeManager.Instance.SetTimer(chamacoSecondsWorking, SendChamacoToRest);
+            }
         }
 
         private void SendChamacoToReady()
