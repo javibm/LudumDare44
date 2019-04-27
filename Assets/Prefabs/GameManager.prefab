@@ -47,13 +47,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4529e089e1ef3574e911dcd6152fdff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialChamacos: 13
-  timePerDay: 120
-  chamacoEnergyPerSecond: 0.5
-  chamacoSecondsWorking: 10
-  chamacosKilledPerFail: 0
+  initialChamacos: 2
+  timePerDay: 60
+  chamacoEnergyPerSecond: 0.05
+  chamacoSecondsWorking: 15
+  chamacosKilledPerFail: 2
   chamacoSecondsResting: 30
-  alienEnergyRequest: 60
+  alienEnergyRequest: 1
   incrementAlienEnergyRequest: 0
   sacrificeCost: 3
   drugsPerSacrifice: 4
