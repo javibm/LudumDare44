@@ -109,8 +109,6 @@ namespace LD44
             // FactoryManager
             FactoryManager.Instance.Init(chamacoEnergyPerSecond);
             AlienManager.Instance.Init(alienEnergyRequest, incrementAlienEnergyRequest, sacrificeCost);
-            // Notificar a marcos que instancia los chamacos en Ready
-
         }
 
         private void OnDestroy()
@@ -189,16 +187,19 @@ namespace LD44
 
         private void NewChamacos(int quantity)
         {
-            SetReadyChamacos(readyChamacos + quantity);
-            SetCurrentChamacos(currentChamacos + quantity);
 
+        }
+
+        private void NewChamaco()
+        {
+            SetReadyChamacos(++readyChamacos);
+            SetCurrentChamacos(++currentChamacos);
         }
 
         private void KillChamacos(int quantity)
         {
             SetReadyChamacos(readyChamacos - quantity);
             SetCurrentChamacos(currentChamacos - quantity);
-            // Notificar a Marcos para que los despawnee
 
             CheckChumacosGameOver();
         }
