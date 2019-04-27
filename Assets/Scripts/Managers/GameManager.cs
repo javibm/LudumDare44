@@ -15,6 +15,9 @@ namespace LD44
         private int timePerDay;
 
         [SerializeField]
+        private float ticksPerSecond;
+
+        [SerializeField]
         private float chamacoEnergyPerSecond;
 
         [SerializeField]
@@ -103,7 +106,7 @@ namespace LD44
             SetNewChamacoDay();
 
             // Arranca el TimeManager
-            TimeManager.Instance.Init(timePerDay);
+            TimeManager.Instance.Init(timePerDay, ticksPerSecond);
             TimeManager.Instance.OnDayEnded += OnDayEnded;
 
             // FactoryManager
@@ -187,7 +190,7 @@ namespace LD44
 
         private void NewChamacos(int quantity)
         {
-
+            ChamacoManager.Instance.SpawnChamacos(quantity);
         }
 
         public void NewChamaco()

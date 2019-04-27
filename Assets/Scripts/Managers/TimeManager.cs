@@ -24,16 +24,17 @@ namespace LD44
 
         private bool initialized = false;
 
-        private int worldTickedTime = 1;
+        private float worldTickedTime;
 
         private Dictionary<int, List<Action>> timers;
 
-        public void Init(int _timePerDay)
+        public void Init(int _timePerDay, float tickedTime)
         {
             timers = new Dictionary<int, List<Action>>();
 
             initialized = true;
             timePerDay = _timePerDay;
+            worldTickedTime = tickedTime / 60;
             currentTick = 0;
             currentTickTime = 0.0f;
         }
@@ -74,7 +75,6 @@ namespace LD44
                     currentTick = 0;
                     if (OnFactoryTicked != null)
                     {
-                        Debug.Log("World Ticked: " + currentTick);
                         OnFactoryTicked();
                     }
                     if (OnDayEnded != null)
@@ -88,7 +88,6 @@ namespace LD44
                     currentTick++;
                     if (OnFactoryTicked != null)
                     {
-                        Debug.Log("World Ticked: " + currentTick);
                         OnFactoryTicked();
                     }
                 }
