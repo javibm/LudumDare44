@@ -25,11 +25,12 @@ namespace LD44
         public Transform WorkHall { get { return workHall; } }
         public Transform RestHall { get { return restHall; } }
 
-        public void SpawnChamacos(int count)
+        public IEnumerator SpawnChamacos(int count)
         {
             for (int i = 0; i < count; i++)
             {
                 ChamacoManager.Instance.SpawnChamaco(ChamacoManager.Instance.IdleArea.transform.position + Vector3.up * 5f);
+                yield return new WaitForSeconds(0.7f);
             }
         }
 
