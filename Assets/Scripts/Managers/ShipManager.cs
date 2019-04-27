@@ -23,7 +23,7 @@ namespace LD44
             currentEnergy += quantity;
             if (OnEnergyAdded != null)
             {
-                OnEnergyAdded(quantity);
+                OnEnergyAdded(currentEnergy);
             }
         }
 
