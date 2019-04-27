@@ -1178,51 +1178,6 @@ PrefabInstance:
       propertyPath: gameplayUIManager
       value: 
       objectReference: {fileID: 1687342181}
-    - target: {fileID: 1976324496978144923, guid: 052867aca5b831b408d0a3811f74d03e,
-        type: 3}
-      propertyPath: chamacoEnergyPerSecond
-      value: 0.025
-      objectReference: {fileID: 0}
-    - target: {fileID: 1976324496978144923, guid: 052867aca5b831b408d0a3811f74d03e,
-        type: 3}
-      propertyPath: chamacoSecondsWorking
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1976324496978144923, guid: 052867aca5b831b408d0a3811f74d03e,
-        type: 3}
-      propertyPath: chamacoSecondsResting
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1976324496978144923, guid: 052867aca5b831b408d0a3811f74d03e,
-        type: 3}
-      propertyPath: chamacosKilledPerFail
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1976324496978144923, guid: 052867aca5b831b408d0a3811f74d03e,
-        type: 3}
-      propertyPath: numberOfNewChamacos
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1976324496978144923, guid: 052867aca5b831b408d0a3811f74d03e,
-        type: 3}
-      propertyPath: daysToBringNewChamacos
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1976324496978144923, guid: 052867aca5b831b408d0a3811f74d03e,
-        type: 3}
-      propertyPath: drugsPerSacrifice
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1976324496978144923, guid: 052867aca5b831b408d0a3811f74d03e,
-        type: 3}
-      propertyPath: alienEnergyRequest
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1976324496978144923, guid: 052867aca5b831b408d0a3811f74d03e,
-        type: 3}
-      propertyPath: incrementAlienEnergyRequest
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 052867aca5b831b408d0a3811f74d03e, type: 3}
 --- !u!1 &1527846076

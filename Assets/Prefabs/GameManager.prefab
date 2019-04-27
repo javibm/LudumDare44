@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4529e089e1ef3574e911dcd6152fdff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialChamacos: 4
+  initialChamacos: 5
   timePerDay: 60
   ticksPerSecond: 60
   chamacoEnergyPerSecond: 0.025
