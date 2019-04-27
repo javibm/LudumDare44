@@ -29,6 +29,12 @@ namespace LD44
         [SerializeField]
         private int alienEnergyRequest;
 
+        [SerializeField]
+        private int sacrificeCost;
+
+        [SerializeField]
+        private int drugsPerSacrifice;
+
         [Header("UI")]
         [SerializeField]
         private GameplayUIManager gameplayUIManager;
@@ -40,14 +46,11 @@ namespace LD44
             {
                 return days;
             }
-            private set
-            {
-                days = value;
-                gameplayUIManager.UpdateDaysLabel(days);
-            }
         }
 
         private int ticks;
+
+        private int drugs;
 
         private int currentChamacos;
 
@@ -69,6 +72,7 @@ namespace LD44
         public Action<int> OnWorkingChamacosModified;
         public Action<int> OnRestingChamacosModified;
         public Action<int> OnReadyChamacosModified;
+        public Action<int> OnDrugsModified;
 
         public void Awake()
         {
@@ -79,9 +83,9 @@ namespace LD44
             gameplayUIManager.Init();
 
             // Reset
-            Days = 0;
-            SetCurrentChamacos(initialChamacos);
-            SetReadyChamacos(initialChamacos);
+            SetDays(0);
+            SetDrugs(0);
+            NewChamacos(initialChamacos);
             SetRestingChamacos(0);
             SetWorkingChamacos(0);
 
@@ -91,7 +95,7 @@ namespace LD44
 
             // FactoryManager
             FactoryManager.Instance.Init(chamacoEnergyPerSecond);
-            AlienManager.Instance.Init(alienEnergyRequest);
+            AlienManager.Instance.Init(alienEnergyRequest, sacrificeCost);
             // Notificar a marcos que instancia los chamacos en Ready
 
         }
@@ -133,12 +137,33 @@ namespace LD44
 
         private void SendChamacoToReady()
         {
-            // Se pueden llamar a ready poque ha pasado el tiempo de rest o porque has gastado comida
-            SetRestingChamacos(--restingChamacos);
-            SetReadyChamacos(++readyChamacos);
+            if (restingChamacos > 0)
+            {
+                // Se pueden llamar a ready poque ha pasado el tiempo de rest o porque has gastado comida
+                SetRestingChamacos(--restingChamacos);
+                SetReadyChamacos(++readyChamacos);
 
-            // Notificar a Marcos para que los mueva
+                // Notificar a Marcos para que los mueva
+            }
+        }
 
+        public void SacrificeChamacos()
+        {
+            if (currentChamacos > sacrificeCost)
+            {
+                KillChamacos(sacrificeCost);
+                SetDrugs(drugs + drugsPerSacrifice);
+            }
+        }
+
+        public void UseDrugs()
+        {
+            if (drugs > 0 && restingChamacos > 0)
+            {
+                SetReadyChamacos(++readyChamacos);
+                SetRestingChamacos(--restingChamacos);
+                SetDrugs(--drugs);
+            }
         }
 
         private void NewChamacos(int quantity)
@@ -156,6 +181,21 @@ namespace LD44
             // Notificar a Marcos para que los despawnee
 
             CheckChumacosGameOver();
+        }
+
+        private void SetDrugs(int value)
+        {
+            drugs = value;
+            if (OnDrugsModified != null)
+            {
+                OnDrugsModified(value);
+            }
+        }
+
+        private void SetDays(int value)
+        {
+            days = value;
+            gameplayUIManager.UpdateDaysLabel(value);
         }
 
         private void SetCurrentChamacos(int value)
@@ -204,7 +244,7 @@ namespace LD44
 
         private void OnDayEnded()
         {
-            Days++;
+            SetDays(++days);
 
             if (FactoryManager.Instance.CurrentEnergy < AlienManager.Instance.CurrentEnergyNeeded)
             {

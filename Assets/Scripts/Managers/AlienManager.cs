@@ -17,11 +17,14 @@ namespace LD44
         }
 
         private int baseAlienEnergyRequest;
+        private int sacrificeCost;
 
         public Action<int> OnEnergyRequest;
-        public void Init(int _alienEnergyRequest)
+        public Action<int> OnUpdateSacrificeCost;
+        public void Init(int _alienEnergyRequest, int _sacrificeCost)
         {
             baseAlienEnergyRequest = _alienEnergyRequest;
+            SetSacrificeCost(_sacrificeCost);
             GetNextRequest();
         }
         public void GetNextRequest()
@@ -30,6 +33,15 @@ namespace LD44
             if (OnEnergyRequest != null)
             {
                 OnEnergyRequest(currentEnergyNeeded);
+            }
+        }
+
+        public void SetSacrificeCost(int value)
+        {
+            sacrificeCost = value;
+            if (OnUpdateSacrificeCost != null)
+            {
+                OnUpdateSacrificeCost(sacrificeCost);
             }
         }
     }

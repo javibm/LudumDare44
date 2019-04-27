@@ -39,8 +39,9 @@ namespace LD44
             currentEnergyChunk += GameManager.Instance.WorkingChamacos * chamacoEnergyPerSecond;
             if (currentEnergyChunk >= 1.0f)
             {
-                currentEnergyChunk = 0.0f;
-                currentEnergy++;
+                currentEnergy += (int)Math.Floor(currentEnergyChunk);
+                currentEnergyChunk -= Math.Max(0, (int)Math.Floor(currentEnergyChunk));
+
                 if (OnChunkEnergyProduced != null)
                 {
                     OnChunkEnergyProduced(currentEnergy);

@@ -20,11 +20,14 @@ namespace LD44
             UpdateEnergyChunkFactoryLabel(0);
             UpdateEnergyShipLabel(0);
             UpdateEnergyAlienLabel(0);
+            UpdateSacrificeCostLabel(0);
+            UpdateDrugsLabel(0);
 
             GameManager.Instance.OnCurrentChamacosModified += UpdateCurrentChamacosLabel;
             GameManager.Instance.OnReadyChamacosModified += UpdateReadyChamacosLabel;
             GameManager.Instance.OnRestingChamacosModified += UpdateRestingChamacosLabel;
             GameManager.Instance.OnWorkingChamacosModified += UpdateWorkingChamacosLabel;
+            GameManager.Instance.OnDrugsModified += UpdateDrugsLabel;
 
             TimeManager.Instance.OnFactoryTicked += UpdateTicksLabel;
 
@@ -33,8 +36,11 @@ namespace LD44
 
             ShipManager.Instance.OnEnergyAdded += UpdateEnergyShipLabel;
             AlienManager.Instance.OnEnergyRequest += UpdateEnergyAlienLabel;
+            AlienManager.Instance.OnUpdateSacrificeCost += UpdateSacrificeCostLabel;
 
             goToWorkButton.onClick.AddListener(GameManager.Instance.SendChamacoToWork);
+            scrificeButton.onClick.AddListener(GameManager.Instance.SacrificeChamacos);
+            useDrugsButton.onClick.AddListener(GameManager.Instance.UseDrugs);
         }
 
         public void UpdateCurrentChamacosLabel(int chamacos)
@@ -87,6 +93,16 @@ namespace LD44
             energyAlienLabel.text = quantity.ToString();
         }
 
+        public void UpdateSacrificeCostLabel(int quantity)
+        {
+            sacrificeCostLabel.text = quantity.ToString();
+        }
+
+        public void UpdateDrugsLabel(int quantity)
+        {
+            drugsLabel.text = quantity.ToString();
+        }
+
         [SerializeField] TextMeshProUGUI currentChamacosLabel;
         [SerializeField] TextMeshProUGUI restingChamacosLabel;
         [SerializeField] TextMeshProUGUI workingChamacosLabel;
@@ -98,7 +114,11 @@ namespace LD44
         [SerializeField] TextMeshProUGUI energyShipLabel;
         [SerializeField] TextMeshProUGUI energyChunkFactoryLabel;
         [SerializeField] TextMeshProUGUI energyAlienLabel;
+        [SerializeField] TextMeshProUGUI sacrificeCostLabel;
+        [SerializeField] TextMeshProUGUI drugsLabel;
 
         [SerializeField] Button goToWorkButton;
+        [SerializeField] Button scrificeButton;
+        [SerializeField] Button useDrugsButton;
     }
 }
