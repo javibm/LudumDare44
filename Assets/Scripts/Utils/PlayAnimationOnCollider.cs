@@ -28,12 +28,13 @@ namespace LD44
             else
             {
                 someoneInside = false;
+                colliders.Clear();
             }
         }
 
         void OnTriggerExit(Collider other)
         {
-            if (!someoneInside)
+            if (!someoneInside && colliders.Count == 0)
             {
                 anim.Play("doorClose");
             }
