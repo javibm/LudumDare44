@@ -82,6 +82,9 @@ namespace LD44
         }
 
         public Action OnGameOver;
+        public Action OnPause;
+        public Action OnResume;
+
         public Action<int> OnCurrentChamacosModified;
         public Action<int> OnWorkingChamacosModified;
         public Action<int> OnRestingChamacosModified;
@@ -113,6 +116,18 @@ namespace LD44
             FactoryManager.Instance.Init(chamacoEnergyPerSecond);
             AlienManager.Instance.Init(alienEnergyRequest, incrementAlienEnergyRequest, sacrificeCost);
         }
+
+    public void Pause()
+    {
+      TimeManager.Instance.enabled = false;
+      OnPause?.Invoke();
+    }
+
+    public void Resume()
+    {
+      TimeManager.Instance.enabled = true;
+      OnResume?.Invoke();
+    }
 
         private void OnDestroy()
         {
