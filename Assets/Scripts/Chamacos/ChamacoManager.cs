@@ -9,6 +9,8 @@ namespace LD44
         [SerializeField]
         private ChamacoController chamacoPrefab;
         [SerializeField]
+        private ChamacoSpawner chamacoSpawner;
+        [SerializeField]
         private ChamacosIdleArea idleArea;
         [SerializeField]
         private Transform workPlace;
@@ -25,13 +27,9 @@ namespace LD44
         public Transform WorkHall { get { return workHall; } }
         public Transform RestHall { get { return restHall; } }
 
-        public IEnumerator SpawnChamacos(int count)
+        public void SpawnChamacos(int count)
         {
-            for (int i = 0; i < count; i++)
-            {
-                ChamacoManager.Instance.SpawnChamaco(ChamacoManager.Instance.IdleArea.transform.position + Vector3.up * 5f);
-                yield return new WaitForSeconds(0.7f);
-            }
+            chamacoSpawner.SpawnChamacos(count);
         }
 
         public void SpawnChamaco(Vector3 spawnPos)
