@@ -53,7 +53,7 @@ namespace LD44
             if (idleChamacos.Count > 0)
             {
                 int random = Random.Range(0, idleChamacos.Count);
-                Destroy(idleChamacos[random].gameObject);
+                StartCoroutine(idleChamacos[random].Dissolve());
                 idleChamacos.RemoveAt(random);
 
                 GameManager.Instance.KillChamaco();

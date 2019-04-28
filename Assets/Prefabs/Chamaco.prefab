@@ -382,6 +382,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  mesh: {fileID: 7376872736195122236}
 --- !u!1001 &955556631405525481
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -459,6 +460,12 @@ PrefabInstance:
 --- !u!4 &5204020965698720499 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 5e1f2d4b253c26645bc15284823b1a7f,
+    type: 3}
+  m_PrefabInstance: {fileID: 955556631405525481}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7376872736195122236 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1504981713932161579, guid: 5e1f2d4b253c26645bc15284823b1a7f,
     type: 3}
   m_PrefabInstance: {fileID: 955556631405525481}
   m_PrefabAsset: {fileID: 0}

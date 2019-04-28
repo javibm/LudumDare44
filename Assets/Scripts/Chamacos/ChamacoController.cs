@@ -14,8 +14,16 @@ namespace LD44
         private AnimationCurve fallAnimationCurve;
         [SerializeField]
         private AnimationCurve walkYAnimationCurve;
+        [SerializeField]
+        private MeshRenderer mesh;
+        private Material material;
 
         private float hallRadius = 1f;
+
+        void Awake()
+        {
+            material = mesh.material;
+        }
 
         void Start()
         {
@@ -93,6 +101,16 @@ namespace LD44
                 ChamacoManager.Instance.OnChamacoResting(this);
                 GameManager.Instance.SendChamacoToRest();
             }
+        }
+
+        public IEnumerator Dissolve()
+        {
+            yield return DoFor(0.4f, (t) =>
+            {
+                material.SetFloat("_DissolveIntensity", Mathf.Lerp(0, 1, t));
+            });
+
+            Destroy(gameObject);
         }
 
         private IEnumerator GoToPositionCoroutine(Vector3 newPos, float radius = 0)
