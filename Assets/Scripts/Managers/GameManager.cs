@@ -128,14 +128,6 @@ namespace LD44
       OnResume?.Invoke();
     }
 
-        private void OnDestroy()
-        {
-            if (TimeManager.Instance != null)
-            {
-                TimeManager.Instance.OnDayEnded -= OnDayEnded;
-            }
-        }
-
         private void MoveChamacoToRest()
         {
             if (workingChamacos > 0)
