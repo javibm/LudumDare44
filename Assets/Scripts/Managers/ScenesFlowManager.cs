@@ -3,10 +3,14 @@ using UnityEngine.SceneManagement;
 
 namespace LD44
 {
+
   public static class ScenesFlowManager
   {
+    public static System.Action OnGameStartedLoading;
+
     public static void GoToGameplay()
     {
+      OnGameStartedLoading?.Invoke();
       SceneManager.LoadSceneAsync(1).completed += OnGameplayLoaded;
     }
 
