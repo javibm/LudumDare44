@@ -12,6 +12,8 @@ namespace LD44
         private float movementSpeed = 1;
         [SerializeField]
         private AnimationCurve fallAnimationCurve;
+        [SerializeField]
+        private AnimationCurve walkYAnimationCurve;
 
         private float hallRadius = 1f;
 
@@ -100,10 +102,16 @@ namespace LD44
             float d = (newPos - iniPos).magnitude;
             float totalTime = d / movementSpeed;
             LookAt(newPos);
+            float yTimer = 0f;
+            float yTotalTime = 0.2f;
             yield return DoFor(totalTime, (t) =>
             {
-                transform.position = Vector3.Lerp(iniPos, newPos, t);
+                var yOffset = 0.2f * walkYAnimationCurve.Evaluate(yTimer / yTotalTime);
+                yTimer = (yTimer + Time.deltaTime) % yTotalTime;
+                var planePosition = Vector3.Lerp(iniPos, newPos, t);
+                transform.position = new Vector3(planePosition.x, planePosition.y + yOffset, planePosition.z);
             });
+            transform.position = newPos;
         }
 
         private void LookAt(Vector3 pos)
