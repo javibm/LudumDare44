@@ -27,6 +27,10 @@ namespace LD44
 
     static AudioManager()
     {
+#if UNITY_EDITOR
+      if (!UnityEditor.EditorApplication.isPlaying)
+        return;
+#endif
       gameObjectInstance = new GameObject("SoundsContainer");
       GameObject.DontDestroyOnLoad(gameObjectInstance);
       audioSources = new List<AudioSource>();
