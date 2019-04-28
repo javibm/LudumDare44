@@ -123,19 +123,10 @@ namespace LD44
       OnPause?.Invoke();
     }
 
-    public void Resume()
-    {
+    public void Resume()    {
       TimeManager.Instance.enabled = true;
       OnResume?.Invoke();
     }
-
-        private void OnDestroy()
-        {
-            if (TimeManager.Instance != null)
-            {
-                TimeManager.Instance.OnDayEnded -= OnDayEnded;
-            }
-        }
 
         private void MoveChamacoToRest()
         {
