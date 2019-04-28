@@ -208,7 +208,7 @@ namespace LD44
 
         private void NewChamacos(int quantity)
         {
-            StartCoroutine(ChamacoManager.Instance.SpawnChamacos(quantity));
+            ChamacoManager.Instance.SpawnChamacos(quantity);
         }
 
         public void NewChamaco()

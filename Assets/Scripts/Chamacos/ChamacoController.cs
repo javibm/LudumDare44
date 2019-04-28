@@ -7,6 +7,8 @@ namespace LD44
     public class ChamacoController : MonoBehaviour
     {
         [SerializeField]
+        private Transform modelTransform;
+        [SerializeField]
         private float movementSpeed = 1;
         [SerializeField]
         private AnimationCurve fallAnimationCurve;
@@ -32,11 +34,13 @@ namespace LD44
                 Vector3 iniPos = transform.position;
                 Vector3 endPos = new Vector3(iniPos.x, 0f, iniPos.z);
                 float totalTime = 1;
+                modelTransform.rotation = Random.rotation;
                 yield return DoFor(totalTime, (t) =>
                 {
                     transform.position = Vector3.Lerp(iniPos, endPos, fallAnimationCurve.Evaluate(t));
                 });
                 transform.position = endPos;
+                modelTransform.rotation = Quaternion.identity;
                 Idle();
                 GameManager.Instance.NewChamaco();
             }
